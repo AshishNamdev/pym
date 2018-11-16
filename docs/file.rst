@@ -23,7 +23,7 @@ The default mode is read only, ie if you do not provide any mode it will open th
 
     >>> fobj = open("love.txt")
     >>> fobj
-    <open file 'love.txt', mode 'r' at 0xb7f2d968>
+    <_io.TextIOWrapper name='love.txt' mode='r' encoding='UTF-8'>
 
 Closing a file
 ==============
@@ -34,7 +34,7 @@ After opening a file one should always close the opened file. We use method *clo
 
     >>> fobj = open("love.txt")
     >>> fobj
-    <open file 'love.txt', mode 'r' at 0xb7f2d968>
+    <_io.TextIOWrapper name='love.txt' mode='r' encoding='UTF-8'>
     >>> fobj.close()
 
 .. important:: Important
@@ -79,8 +79,8 @@ You can even loop through the lines in a file object.
 ::
 
     >>> fobj = open("sample.txt")
-    >>> for x in f:
-    ...     print x,
+    >>> for x in fobj:
+    ...     print(x, end=' ')
     ...
     I love Python
     Pradeepto loves KDE
@@ -90,10 +90,10 @@ Let us write a program which will take the file name as the input from the user 
 
 ::
 
-    #!/usr/bin/env python
-    name = raw_input("Enter the file name: ")
+    #!/usr/bin/env python3
+    name = input("Enter the file name: ")
     fobj = open(name)
-    print fobj.read()
+    print(fobj.read())
     fobj.close()
 
 In the last line you can see that we closed the file object with the help of close() method.
@@ -107,6 +107,34 @@ The output
     I love Python
     Pradeepto loves KDE
     Sankarshan loves Openoffice
+
+Using the with statement
+=========================
+
+In real life scenarios we should try to use `with` statement. It will take care of closing the file for you.
+::
+
+    >>> with open('setup.py') as fobj:
+    ...     for line in fobj:
+    ...         print line,
+    ...
+    #!/usr/bin/env python3
+    """Factorial project"""
+    from setuptools import find_packages, setup
+
+    setup(name = 'factorial',
+        version = '0.1',
+        description = "Factorial module.",
+        long_description = "A test module for our book.",
+        platforms = ["Linux"],
+        author="Kushal Das",
+        author_email="kushaldas@gmail.com",
+        url="https://pymbook.readthedocs.io/en/latest/",
+        license = "http://www.gnu.org/copyleft/gpl.html",
+        packages=find_packages()
+        )
+
+
 
 Writing in a file
 =================
@@ -128,7 +156,7 @@ Now read the file we just created
 
     >>> fobj = open('ircnicks.txt')
     >>> s = fobj.read()
-    >>> print s
+    >>> print(s)
     powerpork
     indrag
     mishti
@@ -141,11 +169,11 @@ In this example we will copy a given text file to another file.
 
 ::
 
-    #!/usr/bin/env python
+    #!/usr/bin/env python3
     import sys
     if len(sys.argv) < 3:
-        print "Wrong parameter"
-        print "./copyfile.py file1 file2"
+        print("Wrong parameter")
+        print("./copyfile.py file1 file2")
         sys.exit(1)
     f1 = open(sys.argv[1])
     s = f1.read()
@@ -162,12 +190,12 @@ The first value in *sys.argv* is the name of the command itself.
 
 ::
 
-    #!/usr/bin/env python
+    #!/usr/bin/env python3
     import sys
-    print "First value", sys.argv[0]
-    print "All values"
+    print("First value", sys.argv[0])
+    print("All values")
     for i, x  in enumerate(sys.argv):
-        print i, x
+        print(i, x)
 
 The output
 
@@ -182,41 +210,6 @@ The output
 
 Here we used a new function *enumerate(iterableobject)*, which returns the index number and the value from the iterable object.
 
-Random seeking in a file
-========================
-
-You can also randomly move around inside a file using *seek()* method. It takes two arguments , offset and whence. To know more about it let us read what Python help tells us
-
-seek(...)
-seek(offset[, whence]) -> None. Move to new file position.
-Argument offset is a byte count. Optional argument whence defaults to
-0 (offset from start of file, offset should be >= 0); other values are 1
-(move relative to current position, positive or negative), and 2 (move
-relative to end of file, usually negative, although many platforms allow
-seeking beyond the end of a file). If the file is opened in text mode,
-only offsets returned by tell() are legal. Use of other offsets causes
-undefined behavior.
-Note that not all file objects are speakable.
-
-Let us see one example
-
-::
-
-    >>> fobj = open('/tmp/tempfile', 'w')
-    >>> fobj.write('0123456789abcdef')
-    >>> fobj.close()
-    >>> fobj = open('/tmp/tempfile')
-    >>> fobj.tell()    #tell us the offset position
-    0L
-    >>> fobj.seek(5) # Goto 5th byte
-    >>> fobj.tell()
-    5L
-    >>> fobj.read(1) #Read 1 byte
-    '5'
-    >>> fobj.seek(-3, 2) # goto 3rd byte from the end
-    >>> fobj.read() #Read till the end of the file
-    'def'
-
 Count spaces, tabs and new lines in a file
 ==========================================
 
@@ -224,7 +217,7 @@ Let us try to write an application which will count the spaces, tabs, and lines 
 
 ::
 
-    #!/usr/bin/env python
+    #!/usr/bin/env python3
 
     import os
     import sys
@@ -237,7 +230,7 @@ Let us try to write an application which will count the spaces, tabs, and lines 
 
         :arg path: Path of the text file to parse
 
-        :return: A tuple with count of spacaes, tabs and lines. 
+        :return: A tuple with count of spacaes, tabs and lines.
         """
         fd = open(path)
         i = 0
@@ -261,7 +254,7 @@ Let us try to write an application which will count the spaces, tabs, and lines 
         """
         if os.path.exists(path):
             spaces, tabs, lines = parse_file(path)
-            print "Spaces %d. tabs %d. lines %d" % (spaces, tabs, lines)
+            print("Spaces %d. tabs %d. lines %d" % (spaces, tabs, lines))
             return True
         else:
             return False
@@ -276,29 +269,20 @@ Let us try to write an application which will count the spaces, tabs, and lines 
 
 You can see that we have two functions in the program , *main* and *parse_file* where the second one actually parses the file and returns the result and we print the result in *main* function. By splitting up the code in smaller units (functions) helps us to organize the codebase and also it will be easier to write test cases for the functions.
 
-Using the with statement
-=========================
 
-In real life scenarios we should try to use `with` statement. It will take care of closing the file for you.
-::
 
-    >>> with open('setup.py') as fobj:
-    ...     for line in fobj:
-    ...         print line,
-    ... 
-    #!/usr/bin/env python
-    """Factorial project"""
-    from setuptools import find_packages, setup
+Let us write some real code
+===========================
 
-    setup(name = 'factorial',
-        version = '0.1',
-        description = "Factorial module.",
-        long_description = "A test module for our book.",
-        platforms = ["Linux"],
-        author="Kushal Das",
-        author_email="kushaldas@gmail.com",
-        url="http://pymbook.readthedocs.org/en/latest/",
-        license = "http://www.gnu.org/copyleft/gpl.html",
-        packages=find_packages()
-        )
+Do you know how many CPU(s) are there in your processor? or what is the model name?
+Let us write some code which can help us to know these things.
 
+If you are in Linux, then you can actually view the output of the *lscpu* command first.
+You can actually find the information in a file located at */proc/cpuinfo*.
+
+Now try to write code which will open the file in read only mode and then read the file
+line by line and find out the number of CPU(s).
+
+.. tip:: Always remember to read files line by line than reading them as a whole. Sometimes you may have to read files which are way bigger than your available RAM.
+
+After you do this, try to write your own lscpu command in Python :)

@@ -11,10 +11,20 @@
 {%- block relbar2 %}{% endblock %}
 {%- block footer %}
     <div class="footer">
+      {% if next or prev %}
+        <div class="footer-navigation" role="navigation" aria-label="footer navigation">
+          {% if prev %}
+            <a href="{{ prev.link|e }}" class="back" title="{{ prev.title|e }}" accesskey="p"> Previous</a>
+          {% endif %}
+          {% if next %}
+            <a href="{{ next.link|e }}" class="front" title="{{ next.title|e }}" accesskey="n">Next</a>
+          {% endif %}
+        </div>
+      {% endif %}
       &copy; Copyright {{ copyright }}.
     </div>
     <a href="https://github.com/kushaldas/pym" class="github">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
     </a>
 <script type="text/javascript">
   var _gauges = _gauges || [];

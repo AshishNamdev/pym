@@ -8,6 +8,10 @@ Welcome to Python for you and me
 
 This is a simple book to learn Python programming language, it is for the programmers who are new to Python.
 
+The Python 2.x version of the same book can be found `here <https://pymbook.readthedocs.io/en/py2/>`_.
+
+If you are new to command line in Linux, you can read `lym <https://lym.readthedocs.io/>`_.
+
 Contents:
 
 .. toctree::
@@ -15,6 +19,7 @@ Contents:
 
    installation
    thebeginning
+   mu
    variablesanddatatypes
    operatorsexpressions
    ifelse
@@ -27,10 +32,12 @@ Contents:
    classes
    modules
    collections
+   editors
    pep8
    igd
    virtualenv
+   typehinting
    testing
    projectstructure
+   click
    flask
-

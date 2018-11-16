@@ -12,15 +12,15 @@ Strings are nothing but simple text. In Python we declare strings in between "" 
     'I am Indian'
     >>> s = 'I am Indian'
     >>> s = "Here is a line \
-    ... splitted in two lines"
+    ... split in two lines"
     >>> s
     'Here is a line split in two lines'
     >>> s = "Here is a line \n split in two lines"
     >>> s
     'Here is a line \n split in two lines'
-    >>> print s
+    >>> print(s)
     Here is a line
-    split in two lines
+     split in two lines
 
 Now if you want to multiline strings you have to use triple single/double quotes.
 
@@ -29,15 +29,36 @@ Now if you want to multiline strings you have to use triple single/double quotes
     >>> s = """ This is a
     ... multiline string, so you can
     ... write many lines"""
-    >>> print s
+    >>> print(s)
     This is a
     multiline string, so you can
     write many lines
 
+
+We can have two string literals side by side, and it will behave like a single string. For example
+
+::
+
+    >>> s = "Hello " "World"
+    >>> print(s)
+    Hello World
+
+This will help you to spilt a long string into smaller chunks in function calls.
+
+
+You can find length of any string using the `len` function call.
+
+::
+
+    >>> s = "Python"
+    >>> len(s)
+    6
+
+
 Different methods available for Strings
 =======================================
 
-Every string object is having couple of buildin methods available, we already saw some of them like *s.split(" ")*.
+Every string object is having couple of builtin methods available, we already saw some of them like *s.split(" ")*.
 
 ::
 
@@ -74,7 +95,7 @@ Every string object is having couple of buildin methods available, we already sa
     >>> s.isalnum()
     True
 
-Because of the space in the first line *isalnum()* returned *False* , it checks for all charecters are alpha numeric or not.
+Because of the space in the first line *isalnum()* returned *False* , it checks for all characters are alpha numeric or not.
 
 ::
 
@@ -90,7 +111,7 @@ Because of the space in the first line *isalnum()* returned *False* , it checks 
 ::
 
     >>> s = "1234"
-    >>> s.isdigit() #To check if all the characters are digits or not
+    >>> s.isdigit() # To check if all the characters are digits or not
     True
     >>> s = "Fedora9 is coming"
     >>> s.islower() # To check if all chracters are lower case or not
@@ -146,10 +167,10 @@ You can particularly strip from the left hand or right hand side also using *lst
 Finding text
 ============
 
-Stings have some methods which will help you in finding text/substring in a string. Examples are given below:
+Strings have some methods which will help you in finding text/substring in a string. Examples are given below:
 
 ::
-    
+
     >>> s = "faulty for a reason"
     >>> s.find("for")
     7
@@ -157,7 +178,7 @@ Stings have some methods which will help you in finding text/substring in a stri
     -1
     >>> s.startswith("fa") #To check if the string startswith fa or not
     True
-    >>> s.endswith("reason") #
+    >>> s.endswith("reason") #To check if the string endswith reason or not
     True
 
 *find()* helps to find the first occurrence of the substring given, if not found it returns -1.
@@ -169,13 +190,13 @@ Palindrome are the kind of strings which are same from left or right whichever w
 
 .. code-block:: python
 
-    #!/usr/bin/env python
-    s = raw_input("Please enter a string: ")
+    #!/usr/bin/env python3
+    s = input("Please enter a string: ")
     z = s[::-1]
     if s == z:
-        print "The string is a palindrome"
+        print("The string is a palindrome")
     else:
-        print "The string is not a palindrome"
+        print("The string is not a palindrome")
 
 The output
 
@@ -195,9 +216,9 @@ In this example we will count the number of words in a given line
 
 ::
 
-    #!/usr/bin/env python
-    s = raw_input("Enter a line: ")
-    print "The number of words in the line are %d" % (len(s.split(" ")))
+    #!/usr/bin/env python3
+    s = input("Enter a line: ")
+    print("The number of words in the line are %d" % (len(s.split(" "))))
 
 The output
 ::
@@ -206,4 +227,21 @@ The output
     Enter a line: Sayamindu is a great programmer
     The number of words in the line are 5
 
+
+Iterating over all characters of a string
+==========================================
+
+You can iterate over a string using simple `for` loop.
+
+::
+
+    >>> for ch in "Python":
+    ...     print(ch)
+    ... 
+    P
+    y
+    t
+    h
+    o
+    n
 

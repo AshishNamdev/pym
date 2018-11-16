@@ -37,14 +37,14 @@ items you sell in your store), this task become overwhelming.
 
 Using templates you are able to set a basic layout for your pages and mention
 which element will change.
-This way to can define your header and keept it consistent over all the pages of
+This way you can define your header once and keep it consistent over all the pages of
 your website, and if you need to change your header, you will only have to
 update it in one place.
 
 Using a template engine will save you a lot of time when creating your
 application but also when updating and maintaining it.
 
-An "Hello world" application in flask
+A "Hello world" application in flask
 -------------------------------------
 
 We are going to perform a very basic application with flask.
